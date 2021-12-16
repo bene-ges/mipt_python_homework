@@ -31,6 +31,8 @@ class Client:
         result = result.decode("utf-8")
         js = {}
         parts = result.strip().split("\n")
+        if parts[0] != "ok":
+            raise ClientError
         for p in parts[1:]:
             metric, percentage, timestamp = p.split(" ")
             percentage = float(percentage)
